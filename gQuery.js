@@ -7,11 +7,11 @@ _g.prototype = {
 	// @param aObj
 	isArray: function(aObj){
 		if(typeof Array.isArray === "function"){  
-	        return Array.isArray(aObj);      
-	    } 
-	    else{  
-	        return Object.prototype.toString.call(aObj) === "[object Array]";      
-	    }  
+			return Array.isArray(aObj);      
+		}
+		else{
+			return Object.prototype.toString.call(aObj) === "[object Array]";      
+		}
 	},
 
 	// 深度克隆
@@ -26,13 +26,14 @@ _g.prototype = {
 	// @param fileName
 	// @param fileUrl 文件路径
 	fileDownLoad: function(fileName, fileUrl){
-        var aLink = document.createElement("a"),
-            evt = document.createEvent("HTMLEvents");
+		var aLink = document.createElement("a"),
+			evt = document.createEvent("HTMLEvents");
             
-        evt.initEvent("click");
-        aLink.download = fileName;
-        aLink.href = fileUrl;
-        aLink.dispatchEvent(evt);
+		evt.initEvent("click");
+		aLink.download = fileName;
+		aLink.href = fileUrl;
+		
+		aLink.dispatchEvent(evt);
 	},
 
 	// 字符串中出现最多的元素及其出现次数
@@ -45,22 +46,22 @@ _g.prototype = {
 				num: 0
 			};
 		for(i in str){
-		    if(!sObj[str.charAt(i)]){
-		        sObj[str.charAt(i)] = 1;
-		    } 
-		    else{
-		        sObj[str.charAt(i)]++;
-		    }
+			if(!sObj[str.charAt(i)]){
+				sObj[str.charAt(i)] = 1;
+			}
+			else{
+				sObj[str.charAt(i)]++;
+			}
 		}
 		for(j in sObj){
-		    if(sObj[j] > sMax.num){
-		        sMax.chars.length = 0;
-		        sMax.num = sObj[j];
-		        sMax.chars.push(j);
-		    } 
-		    else if(sObj[j] == sMax.num){
-		    	sMax.chars.push(j);
-		    }
+			if(sObj[j] > sMax.num){
+				sMax.chars.length = 0;
+				sMax.num = sObj[j];
+				sMax.chars.push(j);
+			}
+			else if(sObj[j] == sMax.num){
+				sMax.chars.push(j);
+			}
 		}
 		return sMax;
 	},
@@ -78,22 +79,22 @@ _g.prototype = {
 			if(typeof arr[i] == 'string'){
 				arr[i] = arr[i] + '_str';
 			}
-		    if(!aObj[arr[i]]){
-		        aObj[arr[i]]  = 1;
-		    } 
-		    else{
-		        aObj[arr[i]]++;
-		    }
+			if(!aObj[arr[i]]){
+				aObj[arr[i]]  = 1;
+			}
+			else{
+				aObj[arr[i]]++;
+			}
 		}
 		for(j in aObj){
-		    if(aObj[j] == 1){
-		    	if(j.indexOf('_str') != -1){
-		    		arrNew.push(j.substr(0,j.length-4));
-		    	}
-		        else{
-		        	arrNew.push(parseInt(j));
-		        }
-		    }
+			if(aObj[j] == 1){
+				if(j.indexOf('_str') != -1){
+					arrNew.push(j.substr(0,j.length-4));
+				}
+				else{
+					arrNew.push(parseInt(j));
+				}
+			}
 		}
 		return arrNew;
 	},
@@ -110,16 +111,16 @@ _g.prototype = {
 		for(var i=0,iLen=arr.length; i<iLen; i++){
 			if(typeof arr[i] == 'string'){
 				if(!aObj[arr[i]+'s']){
-			        aObj[arr[i]+'s']  = 1;
-			        arrNew.push(arr[i]);
-			    }
-			} 
+					aObj[arr[i]+'s']  = 1;
+					arrNew.push(arr[i]);
+				}
+			}
 			else{
 				if(!aObj[arr[i]]){
-			        aObj[arr[i]]  = 1;
-			        arrNew.push(arr[i]);
-			    }
-			} 
+					aObj[arr[i]]  = 1;
+					arrNew.push(arr[i]);
+				}
+			}
 		}
 		return arrNew;
 	},
@@ -134,10 +135,10 @@ _g.prototype = {
 	// Math.random()生成0到1之间的随机数，number.toString(36)是将这个数字转换成36进制（0-9，a-z），最后substr去掉前面的“0.”字符串
 	randomStr: function(len){
 		var rdmstring = "";
-	    while(rdmstring.length<len){
-	    	rdmstring  += Math.random().toString(36).substr(2);
-	    }
-	    return rdmstring.substr(0, len);
+		while(rdmstring.length<len){
+			rdmstring  += Math.random().toString(36).substr(2);
+		}
+		return rdmstring.substr(0, len);
 	},
 
 	// 打乱一个数组
@@ -149,34 +150,34 @@ _g.prototype = {
 	// 数字每三位','号分隔，若小数位多于两位则只保留两位有效数字
 	commaNum: function(num){
 		if( num == undefined || num == null ){
-	        return '';
-	    }
-	    if( Math.abs(num) <= 0.000005){
-	        return "0.00";
-	    }
-	    var flag = false;  //正负标识true-负数，false-正数
-	    if( num < 0 ){
-	        num = Math.abs( num );
-	        flag = true;
-	    }
+			return '';
+		}
+		if( Math.abs(num) <= 0.000005){
+			return "0.00";
+		}
+		var flag = false;  //正负标识true-负数，false-正数
+		if( num < 0 ){
+			num = Math.abs( num );
+			flag = true;
+		}
 
-	    //处理小数(位数和后面保持一致)，防止toFixed四舍五入时将X999.99X进位成X,1000
-	    var _num = Number( num.toFixed(2) );
-	    var _str = '';
-	    while( _num > 1000 ){
-	        var last = _num%1000;
-	        _num = parseInt(_num/1000);
-	        if( _str == '' ){
-	            last = Number(last.toFixed(2));
-	        }
-	        var _last = last>=100 ? last : ( last>=10 ? '0'+last : '00'+last);
-	        _str = ',' + _last + _str;
-	    }
-	    var getNUm = _num + '' + _str;
-	    if( flag == true ){
-	        getNUm = '-' + getNUm;
-	    }
-	    return getNUm;
+		//处理小数(位数和后面保持一致)，防止toFixed四舍五入时将X999.99X进位成X,1000
+		var _num = Number( num.toFixed(2) );
+		var _str = '';
+		while( _num > 1000 ){
+			var last = _num%1000;
+			_num = parseInt(_num/1000);
+			if( _str == '' ){
+				last = Number(last.toFixed(2));
+			}
+			var _last = last>=100 ? last : ( last>=10 ? '0'+last : '00'+last);
+			_str = ',' + _last + _str;
+		}
+		var getNUm = _num + '' + _str;
+		if( flag == true ){
+			getNUm = '-' + getNUm;
+		}
+		return getNUm;
 	},
 
 	// 手机号验证
@@ -213,18 +214,18 @@ _g.prototype = {
 	versions: function(){
 		var self = this;
 		return {
-		   trident: self.userDev.indexOf('Trident') > -1, //IE内核
-		   presto: self.userDev.indexOf('Presto') > -1, //opera内核
-		   webKit: self.userDev.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
-		   gecko: self.userDev.indexOf('Gecko') > -1 && self.userDev.indexOf('KHTML') == -1,//火狐内核
-		   mobile: !!self.userDev.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
-		   ios: !!self.userDev.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
-		   android: self.userDev.indexOf('Android') > -1 || self.userDev.indexOf('Adr') > -1, //android终端
-		   iPhone: self.userDev.indexOf('iPhone') > -1 , //是否为iPhone或者QQHD浏览器
-		   iPad: self.userDev.indexOf('iPad') > -1, //是否iPad
-		   webApp: self.userDev.indexOf('Safari') == -1, //是否web应该程序，没有头部与底部
-		   weixin: self.userDev.indexOf('MicroMessenger') > -1, //是否微信 （2015-01-22新增）
-		   qq: self.userDev.match(/\sQQ/i) == "qq" //是否QQ
+			trident: self.userDev.indexOf('Trident') > -1, //IE内核
+			presto: self.userDev.indexOf('Presto') > -1, //opera内核
+			webKit: self.userDev.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+			gecko: self.userDev.indexOf('Gecko') > -1 && self.userDev.indexOf('KHTML') == -1,//火狐内核
+			mobile: !!self.userDev.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+			ios: !!self.userDev.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+			android: self.userDev.indexOf('Android') > -1 || self.userDev.indexOf('Adr') > -1, //android终端
+			iPhone: self.userDev.indexOf('iPhone') > -1 , //是否为iPhone或者QQHD浏览器
+			iPad: self.userDev.indexOf('iPad') > -1, //是否iPad
+			webApp: self.userDev.indexOf('Safari') == -1, //是否web应该程序，没有头部与底部
+			weixin: self.userDev.indexOf('MicroMessenger') > -1, //是否微信 （2015-01-22新增）
+			qq: self.userDev.match(/\sQQ/i) == "qq" //是否QQ
 		};
 	},
 
