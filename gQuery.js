@@ -28,11 +28,10 @@ _g.prototype = {
 	fileDownLoad: function(fileName, fileUrl){
         var aLink = document.createElement("a"),
             evt = document.createEvent("HTMLEvents");
-
+            
         evt.initEvent("click");
         aLink.download = fileName;
         aLink.href = fileUrl;
-
         aLink.dispatchEvent(evt);
 	},
 
