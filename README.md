@@ -1,2 +1,2 @@
 # gQuery.js
-Thank u for watching! it's young, welcome to your suggest!
+Thank u for watching!
