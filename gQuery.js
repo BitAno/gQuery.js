@@ -23,6 +23,25 @@ _g.prototype = {
 		return o;
 	},
 
+	// 继承 方法1
+	extend1: function(child, parent) {
+		var f = function() {};
+		f.prototype = parent.prototype;
+		child.prototype = new f();
+		child.prototype.constructor = child;
+		child.uber = parent.prototype; // 保留一条通道，可以直接调用父对象的方法
+	}
+
+	// 继承 方法2
+	extend2: function(child, parent) {
+		var c = child.prototype;
+		var p = parent.prototype;
+		for(var i in p) {
+			c[i] = p[i];
+		}
+		c.uber = p;
+	}
+
 	// 文件下载
 	// @param fileName
 	// @param fileUrl 文件路径
@@ -67,7 +86,7 @@ _g.prototype = {
 		return sMax;
 	},
 
-	// 数组中不重复的元素（不同于去重,只适用于数值和字符串元素）
+	// 数组中不重复的元素（不同于去重,只适用于项值为数值和字符串）
 	// 返回一个新的数组
 	singleInArr: function(arr) {
 		var self = this;
