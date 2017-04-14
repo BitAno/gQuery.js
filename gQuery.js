@@ -18,7 +18,7 @@ _g.prototype = {
 	deepClone: function(aObj) {
 		var o = aObj instanceof Array ? [] : {};
 		for(var k in aObj) {
-			o[k] = typeof aObj[k] === Object ? deepClone(aObj[k]) : aObj[k];
+			o[k] = typeof aObj[k] === Object ? this.deepClone(aObj[k]) : aObj[k];
 		}
 		return o;
 	},
