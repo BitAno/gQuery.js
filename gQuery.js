@@ -16,9 +16,14 @@ _g.prototype = {
 
     // 深度克隆
     deepClone: function(aObj) {
-        var o = aObj instanceof Array ? [] : {};
+        if(!aObj || (typeof aObj !== "object" && typeof aObj !== 'function')) {
+            return aObj;
+        }
+        var o = Object.prototype.toString.call(aObj) == '[object Array]' ? [] : {};
         for(var k in aObj) {
-            o[k] = typeof aObj[k] === Object ? this.deepClone(aObj[k]) : aObj[k];
+            if(aObj.hasOwnProperty(k)) {
+                o[k] = typeof aObj[k] === 'object' ? this.deepClone(aObj[k]) : aObj[k];                
+            }
         }
         return o;
     },
